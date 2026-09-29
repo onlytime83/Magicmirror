@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#08091d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="魔镜魔镜">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+  <title>魔镜魔镜</title>
+</head>
+<body>
+  <div id="app">
+    <canvas id="stars"></canvas>
+    <header class="topbar">
+      <div class="brand"><span>♛</span> 魔镜魔镜</div>
+      <button id="settingsBtn" class="icon-btn" aria-label="设置">⚙</button>
+    </header>
+
+    <main>
+      <section id="welcome" class="screen active">
+        <div class="welcome-title">魔镜魔镜</div>
+        <div class="subtitle">每天，对自己说一句好话。</div>
+        <div class="magic-orb">
+          <div class="orb-core"></div>
+          <div class="orb-ring r1"></div><div class="orb-ring r2"></div>
+          <div class="orb-spark">✦</div>
+        </div>
+        <p class="welcome-text">打开魔镜，<br>让它告诉你：你有多美。</p>
+        <button id="openMirror" class="primary-btn">开启魔镜 ✨</button>
+      </section>
+
+      <section id="mirror" class="screen">
+        <div class="mirror-wrap">
+          <div class="mirror-frame">
+            <div class="gem">◆</div>
+            <div class="flower-garland" aria-hidden="true"></div>
+            <div class="camera-window">
+              <video id="camera" autoplay playsinline muted></video>
+              <div class="beauty-overlay"></div>
+              <div class="mirror-shine"></div>
+              <div id="cameraFallback">正在打开魔镜…</div>
+            </div>
+            <div class="frame-bottom">✦</div>
+          </div>
+          <div id="status" class="status">对魔镜说一句话吧…</div>
+        </div>
+
+        <div id="answerBox" class="answer-box hidden">
+          <div id="answerText"></div>
+          <div class="voice-line">
+            <button id="speakAgain" class="tiny-btn">🔊</button>
+            <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="micBtn" class="mic-btn" aria-label="按住说话"><span>🎙</span></button>
+          <div id="micHint">按住说话</div>
+          <button id="chatBtn" class="ghost-btn">和魔镜文字聊天</button>
+          <button id="examplesBtn" class="ghost-btn">我可以这样问 ✦</button>
+        </div>
+      </section>
+
+      <section id="conversation" class="screen" aria-label="与魔镜对话">
+        <div class="chat-header">
+          <div><strong>和魔镜聊聊</strong><small>此刻的心情，也可以慢慢说</small></div>
+          <button id="closeChat" class="icon-btn" aria-label="关闭对话">×</button>
+        </div>
+        <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+        <form id="chatForm" class="chat-form">
+          <input id="chatInput" type="text" maxlength="2000" placeholder="写下你想说的话…" autocomplete="off" aria-label="输入消息">
+          <button id="chatSend" type="submit" aria-label="发送消息">↑</button>
+        </form>
+      </section>
+
+      <section id="examples" class="screen">
+        <h2>你可以这样问：</h2>
+        <div class="question-list">
+          <button data-q="我今天漂亮吗？">👑　我今天漂亮吗？</button>
+          <button data-q="谁是最漂亮的人？">💗　谁是最漂亮的人？</button>
+          <button data-q="我美吗？">⭐　我美吗？</button>
+          <button data-q="我今天状态不好">☁️　我今天状态不好……</button>
+          <button data-q="我最近很倒霉">☀️　我最近很倒霉……</button>
+          <button data-q="我能成功吗？">💎　我能成功吗？</button>
+          <button data-q="我是不是很笨？">🌿　我是不是很笨？</button>
+          <button data-q="给我一句鼓励">💗　给我一句鼓励</button>
+        </div>
+        <button id="closeExamples" class="close-btn">×</button>
+      </section>
+
+      <section id="settings" class="screen">
+        <h2>魔镜设置</h2>
+        <label class="setting-row">镜面美颜 <input id="beautyToggle" type="checkbox" checked></label>
+        <label class="setting-row">自动朗读 <input id="ttsToggle" type="checkbox" checked></label>
+        <div class="persona-title">选择你的魔镜</div>
+        <div class="personas">
+          <button data-persona="moon">🌙<b>月光魔镜</b><small>温柔治愈</small></button>
+          <button data-persona="queen">👑<b>女王魔镜</b><small>自信霸气</small></button>
+          <button data-persona="flower">🌸<b>花语魔镜</b><small>浪漫少女</small></button>
+          <button data-persona="fate">🔮<b>命运魔镜</b><small>神秘魔幻</small></button>
+          <button data-persona="sun">☀️<b>太阳魔镜</b><small>阳光积极</small></button>
+        </div>
+        <button id="closeSettings" class="close-btn">×</button>
+      </section>
+    </main>
+
+    <div id="toast"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
